@@ -1,9 +1,10 @@
 import * as components from "../components"
-import * as Icons from "@element-plus/icons-vue"
 import ElementPlus from "element-plus"
 import "element-plus/dist/index.css"
+import * as Icons from "./icons"
 export default (app) => {
   app.use(ElementPlus)
+  console.log("components", components)
   // 装载components组件
   for (const i in components) {
     const item = components[i]

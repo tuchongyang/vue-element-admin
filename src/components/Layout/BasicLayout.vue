@@ -3,9 +3,7 @@
     <s-aside />
     <el-container>
       <el-header class="a-header">
-        <div class="trigger">
-          <el-icon><expand /><fold /></el-icon>
-        </div>
+        <SAsideToggle />
         <div class="header-right"></div>
       </el-header>
       <el-main>
@@ -16,8 +14,8 @@
   </el-container>
 </template>
 <script setup>
-import { Expand } from "@element-plus/icons-vue"
 import SAside from "./SAside"
+import SAsideToggle from "./SAsideToggle"
 </script>
 <style scoped lang="scss">
 .a-aside {
@@ -29,7 +27,5 @@ import SAside from "./SAside"
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   height: 64px;
   line-height: 64px;
-  .trigger {
-  }
 }
 </style>

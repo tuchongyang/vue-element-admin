@@ -1,0 +1,21 @@
+<template>
+  <div class="aside-toggle" @click="toggle">
+    <el-icon><expand v-if="!sideOpen" /><fold v-else /></el-icon>
+  </div>
+</template>
+<script setup>
+import { computed } from "vue"
+import { useStore } from "vuex"
+const store = useStore()
+const sideOpen = computed(() => store.state.layout.sideOpen)
+const toggle = () => {
+  store.commit("layout/toggleSide")
+}
+// console.log("sideOpen", sideOpen)
+</script>
+<style scoped>
+.aside-toggle {
+  cursor: pointer;
+  display: inline-block;
+}
+</style>

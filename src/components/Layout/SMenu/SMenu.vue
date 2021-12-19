@@ -1,37 +1,40 @@
 <template>
-  <el-menu active-text-color="#ffd04b" background-color="#191919" class="s-menu" default-active="2" text-color="#fff" @open="handleOpen" @close="handleClose">
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group title="Group One">
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item one</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>item four</template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="2">
-      <el-icon><icon-menu /></el-icon>
-      <span>Navigator Two</span>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <el-icon><document /></el-icon>
-      <span>Navigator Three</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon><setting /></el-icon>
-      <span>Navigator Four</span>
-    </el-menu-item>
+  <el-menu :collapse="isCollapse" :default-active="defaultActive" :router="true" active-text-color="#ffd04b" background-color="#191919" class="s-menu" text-color="#fff">
+    <template v-for="(item, i) in routes" :key="i">
+      <SMenuItem :menu="item" />
+    </template>
   </el-menu>
 </template>
-
+<script setup>
+import { computed } from "vue"
+import { useStore } from "vuex"
+import { useRouter, useRoute } from "vue-router"
+import SMenuItem from "./SMenuItem.vue"
+const store = useStore()
+const isCollapse = computed(() => !store.state.layout.sideOpen)
+const route = useRoute()
+const router = useRouter()
+const allroutes = router.getRoutes()
+const rootRoute = allroutes.find((a) => a.path == "/" && a.children.length)
+const getChildren = (childrens, parentPath) => {
+  const result = []
+  for (let i in childrens) {
+    const child = childrens[i]
+    if (child.children && child.children.length) {
+      child.children = getChildren(child.children, child.path)
+    }
+    const { path, name, children, meta = {} } = child
+    if (child.name) {
+      const prefix = !/^\//.test(path) ? "/" : ""
+      result.push({ path: parentPath + prefix + path, name, children, meta })
+    }
+  }
+  return result
+}
+const routes = getChildren(rootRoute.children, "")
+const defaultActive = computed(() => route.path)
+// console.log("router", routes)
+</script>
 <style scoped lang="scss">
 .s-menu {
   border: 0;
