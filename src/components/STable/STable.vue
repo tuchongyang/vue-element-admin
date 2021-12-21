@@ -28,7 +28,7 @@
           <el-button type="text" @click="create(scope.row)">
             <el-icon><edit /></el-icon> 编辑
           </el-button>
-          <el-button type="text">
+          <el-button type="text" @click="detail(scope.row)">
             <el-icon><document /></el-icon> 详情
           </el-button>
           <el-popover v-model:visible="removeVisibleMap[scope.$index]" placement="left" :width="160" :tabindex="scope.$index">
@@ -47,6 +47,7 @@
       </el-table-column>
     </el-table>
     <el-pagination class="pagination" background layout="total, sizes, prev, pager, next, jumper" :total="props.pageOptions.total" v-model:current-page="listQuery.pageIndex" v-model:page-size="listQuery.pageSize" @current-change="fetchData" @size-change="fetchData"> </el-pagination>
+    <STableDetail ref="STableDetailRef" />
   </div>
 </template>
 <script setup>
@@ -54,6 +55,7 @@ import { defineProps, computed, ref, reactive, provide } from "vue"
 import STableItem from "./STableItem.vue"
 import STableFilter from "./STableFilter.vue"
 import STableMenu from "./STableMenu.vue"
+import STableDetail from "./STableDetail.vue"
 import { useFormModal } from "@/components/FormModal"
 import { deepClone } from "@/utils/common"
 const props = defineProps({
@@ -254,9 +256,15 @@ const removeConfirm = async (scope) => {
   await (props.fetchRemove && props.fetchRemove(scope.row))
   removeVisibleMap[scope.$index] = false
 }
+
 const getColumnAttrs = (column) => {
   const { children, ...args } = column
   return args || children
+}
+// 详情
+const STableDetailRef = ref()
+const detail = (row) => {
+  STableDetailRef.value.open({ data: row, columns: columns.value })
 }
 </script>
 <style lang="scss">

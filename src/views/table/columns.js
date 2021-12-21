@@ -196,6 +196,7 @@ export function getColumns() {
           type: "textarea",
           rows: 6,
         },
+        span: 24,
       },
     },
   ]
