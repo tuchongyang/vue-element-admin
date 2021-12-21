@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    普通 表格
     <STable
       :data="data"
       :columns="columns"
@@ -19,6 +18,7 @@
 </template>
 <script>
 import { getColumns } from "./columns"
+import api from "@/api"
 export default {
   data() {
     return {
@@ -37,49 +37,21 @@ export default {
     }
   },
   methods: {
-    fetchData({ currentPage, pageSize, sortColumn, sortType, search }) {
+    fetchData({ pageIndex, pageSize, sortColumn, sortType, search }) {
       return new Promise((resolve) => {
         const params = {
-          page: {
-            current: currentPage,
-            size: pageSize,
-          },
-          search: [],
+          pageIndex,
+          pageSize,
+          ...search,
         }
-
-        Object.keys(search).forEach((key) => {
-          params.search.push({
-            key: key,
-            value: search[key],
-          })
-        })
 
         if (sortColumn) {
           params.sortColumn = sortColumn
           params.sortType = sortType
         }
         console.log("params", params)
-        setTimeout(() => {
-          const res = {
-            data: [
-              {
-                name: "张三",
-                account: "ttt",
-                phone: "13555555555",
-                email: "admin@admin.com",
-                role: 1,
-                status: 1,
-              },
-              {
-                name: "张三1",
-                role: 2,
-                status: 2,
-              },
-            ],
-            total: 1,
-          }
+        api.user.list(params).then((res) => {
           this.data = res.data // 数据赋值
-          console.log("this.data", this.data)
           this.pageOptions.total = res.total // 设置总页数
           resolve()
         })
@@ -96,6 +68,7 @@ export default {
       })
     },
     fetchEdit(editedParams, fullParams) {
+      console.log("editedParams", editedParams)
       editedParams.id = fullParams.id
       return new Promise((resolve, reject) => {
         Promise.resolve(() => {
@@ -111,7 +84,7 @@ export default {
       //   }
 
       return new Promise((resolve, reject) => {
-        Promise.then(() => {
+        Promise.resolve(() => {
           resolve(row)
         }).catch((err) => {
           reject(err)

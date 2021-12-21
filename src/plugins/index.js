@@ -1,10 +1,12 @@
 import * as components from "../components"
 import ElementPlus from "element-plus"
 import "element-plus/dist/index.css"
+import zhCn from "element-plus/es/locale/lang/zh-cn"
 import * as Icons from "./icons"
+
+import FormModal from "@/components/FormModal"
 export default (app) => {
-  app.use(ElementPlus)
-  console.log("components", components)
+  app.use(ElementPlus, { locale: zhCn, size: "small" })
   // 装载components组件
   for (const i in components) {
     const item = components[i]
@@ -17,4 +19,6 @@ export default (app) => {
     const name = i
     app.component(name, item)
   }
+
+  app.use(FormModal)
 }

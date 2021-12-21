@@ -1,1 +1,23 @@
-export { Expand, Fold, Location, House } from "@element-plus/icons-vue"
+export {
+  Expand,
+  Fold,
+  Location,
+  House,
+  CircleCheck,
+  Remove,
+  // 表格组件需要用到的图标
+  Refresh,
+  Search,
+  Histogram,
+  ScaleToOriginal,
+  Download,
+  Printer,
+  Operation,
+  CaretLeft,
+  CaretRight,
+  VideoPause,
+  Edit,
+  Delete,
+  Document,
+  Plus,
+} from "@element-plus/icons-vue"

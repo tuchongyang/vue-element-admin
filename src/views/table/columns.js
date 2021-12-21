@@ -1,3 +1,4 @@
+import constant from "@/utils/constant"
 export function getColumns() {
   return [
     {
@@ -8,6 +9,9 @@ export function getColumns() {
           prop: "name",
           width: 140,
           sortable: "custom",
+          filter: {
+            component: "input",
+          },
           form: {
             formItem: {
               rules: [
@@ -24,7 +28,9 @@ export function getColumns() {
           label: "登录账号",
           prop: "account",
           width: 120,
-          type: "Input",
+          filter: {
+            component: "input",
+          },
           sortable: "custom",
           form: {
             formItem: {
@@ -45,24 +51,23 @@ export function getColumns() {
       label: "手机号",
       prop: "phone",
       width: 130,
+      filter: {
+        component: "input",
+      },
       form: {
-        component: {
-          name: "Input",
-        },
-        formItem: {
-          rules: [
-            {
-              required: true,
-              trigger: "blur",
-              message: "请输入手机号",
-            },
-            {
-              len: 11,
-              message: "请输入正确的手机号码",
-              trigger: "blur",
-            },
-          ],
-        },
+        component: "input",
+        rules: [
+          {
+            required: true,
+            trigger: "blur",
+            message: "请输入手机号",
+          },
+          {
+            len: 11,
+            message: "请输入正确的手机号码",
+            trigger: "blur",
+          },
+        ],
       },
     },
     {
@@ -70,23 +75,19 @@ export function getColumns() {
       prop: "email",
       width: 200,
       form: {
-        component: {
-          name: "Input",
-        },
-        formItem: {
-          rules: [
-            {
-              required: true,
-              message: "请输入邮箱",
-              trigger: "blur",
-            },
-            {
-              type: "email",
-              message: "请填写正确的邮箱",
-              trigger: "blur",
-            },
-          ],
-        },
+        component: "input",
+        rules: [
+          {
+            required: true,
+            message: "请输入邮箱",
+            trigger: "blur",
+          },
+          {
+            type: "email",
+            message: "请填写正确的邮箱",
+            trigger: "blur",
+          },
+        ],
       },
     },
     {
@@ -99,23 +100,15 @@ export function getColumns() {
         { label: "普通管理员", value: 2 },
       ],
       form: {
-        component: {
-          name: "Select",
-        },
-        formItem: {
-          rules: [
-            {
-              required: true,
-              trigger: "change",
-              message: "请选择用户角色",
-            },
-          ],
-        },
-      },
-      addForm: {
-        component: {
-          value: "ROLE_USER",
-        },
+        component: "select",
+        rules: [
+          {
+            required: true,
+            trigger: "change",
+            message: "请选择用户角色",
+          },
+        ],
+        value: 1,
       },
       dict: {
         url: "/api/icrud/role",
@@ -126,11 +119,13 @@ export function getColumns() {
       prop: "gender",
       width: 100,
       align: "center",
-      type: "Radio",
-      addForm: {
-        component: {
-          value: "3",
-        },
+      options: [
+        { label: "男", value: 1 },
+        { label: "女", value: 2 },
+      ],
+      form: {
+        component: "radio",
+        value: 1,
       },
       dict: {
         url: "/api/icrud/gender",
@@ -140,18 +135,18 @@ export function getColumns() {
       label: "状态",
       prop: "status",
       align: "center",
-      options: [
-        { label: "启用", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: constant.CommonStatus,
+      filter: {
+        component: "select",
+      },
+
       componentName: "Radio",
       component: {
         formatBadge: true,
       },
       form: {
-        component: {
-          name: "Radio",
-        },
+        component: "radio",
+        value: 1,
       },
       addForm: {
         component: {
@@ -166,17 +161,11 @@ export function getColumns() {
       label: "创建时间",
       prop: "createTime",
       width: 170,
-      sortable: "custom",
-      sortType: "desc",
-      componentName: "DatePicker",
-      component: {
-        type: "datetime",
-      },
       form: {
-        component: {
-          name: "DatePicker",
-          type: "datetime",
-          format: "yyyy-MM-dd HH:mm:ss",
+        component: "date-picker",
+        props: {
+          format: "YYYY/MM/DD",
+          valueFormat: "YYYY/MM/DD",
         },
       },
       addForm: {
@@ -188,13 +177,11 @@ export function getColumns() {
       prop: "id",
       width: 120,
       form: {
-        component: {
-          name: "Input",
+        component: "input",
+        props: {
           disabled: true,
         },
-      },
-      addForm: {
-        show: false,
+        hidden: (form) => !form.id,
       },
     },
     {
@@ -202,18 +189,12 @@ export function getColumns() {
       prop: "desc",
       width: 140,
       show: false,
-      tooltip: true,
-      formatData: false,
+      showOverflowTooltip: true,
       form: {
-        component: {
-          name: "Input",
+        component: "input",
+        props: {
           type: "textarea",
-          autosize: {
-            minRows: 3,
-          },
-        },
-        grid: {
-          span: 24,
+          rows: 6,
         },
       },
     },
