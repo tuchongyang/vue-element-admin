@@ -10,7 +10,7 @@
       </div>
       <div class="min-control"><STableMenu :filterVisible="filterVisible" @operation="onMenuOption" /></div>
     </div>
-    <el-table border :data="list" v-loading="loading" v-bind="tableAttrs">
+    <el-table border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick">
       <template v-for="item in columns" :key="item.label">
         <el-table-column v-bind="getColumnAttrs(item)" v-if="!item.hidden">
           <template #default="scope">
@@ -31,18 +31,9 @@
           <el-button type="text" @click="detail(scope.row)">
             <el-icon><document /></el-icon> 详情
           </el-button>
-          <el-popover v-model:visible="removeVisibleMap[scope.$index]" placement="left" :width="160" :tabindex="scope.$index">
-            <p style="margin-bottom: 10px">确认删除这条数据吗?</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="removeCancel(scope)">取消</el-button>
-              <el-button type="primary" size="mini" @click="removeConfirm(scope)">确 定</el-button>
-            </div>
-            <template #reference>
-              <el-button type="text" style="color: #ff0000" @click.stop="startremove(scope)">
-                <el-icon><delete /></el-icon> 删除
-              </el-button>
-            </template>
-          </el-popover>
+          <el-button type="text" style="color: #ff0000" @click.stop="startremove(scope)">
+            <el-icon><delete /></el-icon> 删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -51,7 +42,7 @@
   </div>
 </template>
 <script setup>
-import { defineProps, computed, ref, reactive, provide } from "vue"
+import { defineProps, computed, ref, reactive, provide, getCurrentInstance } from "vue"
 import STableItem from "./STableItem.vue"
 import STableFilter from "./STableFilter.vue"
 import STableMenu from "./STableMenu.vue"
@@ -217,6 +208,7 @@ const create = (row) => {
       props: a.form && a.form.props,
       value: a.form && a.form.value,
       hidden: a.form && a.form.hidden,
+      span: (a.form && a.form.span) || 12,
     }
     formSchema.formItem.push(item)
     if (a.form && a.form.rules) {
@@ -243,18 +235,24 @@ const create = (row) => {
     },
   })
 }
-const removeVisibleMap = reactive({})
+const instance = getCurrentInstance()
 const startremove = (scope) => {
-  setTimeout(() => {
-    removeVisibleMap[scope.$index] = true
-  }, 500)
-}
-const removeCancel = (scope) => {
-  removeVisibleMap[scope.$index] = false
-}
-const removeConfirm = async (scope) => {
-  await (props.fetchRemove && props.fetchRemove(scope.row))
-  removeVisibleMap[scope.$index] = false
+  instance.appContext.config.globalProperties
+    .$confirm("确认删除当前数据吗", "提示", {
+      type: "warning",
+      cancelButtonText: "取消",
+      confirmButtonText: "确定",
+    })
+    .then(async () => {
+      console.log("ss1")
+      await (props.fetchRemove && props.fetchRemove(scope.row))
+      console.log("ss")
+      instance.appContext.config.globalProperties.$message({
+        type: "success",
+        message: "删除成功",
+      })
+    })
+    .catch(() => {})
 }
 
 const getColumnAttrs = (column) => {
@@ -265,6 +263,12 @@ const getColumnAttrs = (column) => {
 const STableDetailRef = ref()
 const detail = (row) => {
   STableDetailRef.value.open({ data: row, columns: columns.value })
+}
+// 行点击事件
+const onRowClick = (row) => {
+  if (typeof instance.attrs["click-row-to-view"] !== "undefined") {
+    detail(row)
+  }
 }
 </script>
 <style lang="scss">

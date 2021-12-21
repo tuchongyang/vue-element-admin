@@ -3,6 +3,7 @@ export {
   Fold,
   Location,
   House,
+  Grid,
   CircleCheck,
   Remove,
   // 表格组件需要用到的图标
