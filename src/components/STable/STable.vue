@@ -11,7 +11,7 @@
       </div>
       <div class="min-control"><STableMenu :filterVisible="filterVisible" @operation="onMenuOption" /></div>
     </div>
-    <el-table border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick" @selection-change="selectionChange">
+    <el-table id="table" border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick" @selection-change="selectionChange">
       <el-table-column type="index" v-if="$attrs.index !== 'undefined'" />
       <el-table-column type="selection" v-if="$attrs.selection !== 'undefined'" />
       <template v-for="item in columns" :key="item.label">
@@ -79,6 +79,7 @@
 </template>
 <script setup>
 import { defineProps, defineEmits, computed, ref, reactive, provide, getCurrentInstance } from "vue"
+import { useRoute } from "vue-router"
 import STableItem from "./STableItem.vue"
 import STableFilter from "./STableFilter.vue"
 import STableMenu from "./STableMenu.vue"
@@ -140,7 +141,7 @@ const props = defineProps({
   },
 })
 const emits = defineEmits(["selectionChange"])
-
+const route = useRoute()
 const list = computed(() => {
   const result = props.data.map((item) => {
     return item
@@ -213,7 +214,13 @@ const cs = deepClone(props.columns)
 // })
 columns.value = cs //.filter((a) => !a.hidden)
 provide("columns", columns)
-
+const getTableValue = (val, schema) => {
+  if (schema.options) {
+    const cur = schema.options.find((a) => a.value == val)
+    return (cur && cur.label) || val
+  }
+  return val
+}
 // 菜单点击事件
 const onMenuOption = (option, val) => {
   switch (option) {
@@ -229,6 +236,15 @@ const onMenuOption = (option, val) => {
       }
       break
     }
+    case "export":
+      import("@/utils/Export2Excel").then((excel) => {
+        excel.export_json_to_excel({
+          header: columns.value.map((a) => a.label),
+          data: list.value.map((a) => columns.value.map((b) => getTableValue(a[b.prop], b))),
+          filename: route.meta.title,
+        })
+      })
+      break
   }
 }
 
@@ -283,9 +299,7 @@ const startremove = (scope) => {
       confirmButtonText: "确定",
     })
     .then(async () => {
-      console.log("ss1")
       await (props.fetchRemove && props.fetchRemove(scope.row))
-      console.log("ss")
       instance.appContext.config.globalProperties.$message({
         type: "success",
         message: "删除成功",

@@ -1,7 +1,7 @@
 <template>
   <el-container class="a-container">
     <s-aside />
-    <el-container>
+    <el-container style="position: relative">
       <el-header class="a-header">
         <div class="header-left">
           <SAsideToggle />

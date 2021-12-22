@@ -1,12 +1,35 @@
 import { createRouter, createWebHistory } from "vue-router"
+import NProgress from "nprogress"
+import "nprogress/nprogress.css"
 
 const routes = [
+  {
+    path: "/redirect",
+    component: () => import("@/components/Layout/BasicLayout"),
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/redirect/RedirectView"),
+      },
+    ],
+  },
   {
     path: "/",
     name: "Dashboard",
     meta: { title: "主页", icon: "House" },
     component: () => import("@/components/Layout/BasicLayout"),
     children: [
+      {
+        path: "404",
+        component: () => import("@/views/error-page/404.vue"),
+        hidden: true,
+      },
+      {
+        path: "401",
+        component: () => import("@/views/error-page/401.vue"),
+        hidden: true,
+      },
       {
         path: "",
         name: "home",
@@ -65,6 +88,9 @@ const routes = [
           },
         ],
       },
+      // 404 page must be placed at the end !!!
+      // using pathMatch install of "*" in vue-router 4.0
+      { path: "/:pathMatch(.*)", redirect: "/404", hidden: true },
     ],
   },
 ]
@@ -73,5 +99,11 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
-
+router.beforeEach(async (to, from, next) => {
+  NProgress.start()
+  next()
+})
+router.afterEach(() => {
+  NProgress.done()
+})
 export default router
