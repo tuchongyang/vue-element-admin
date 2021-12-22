@@ -3,7 +3,7 @@
     <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
     <div v-else>
       <Loading v-if="loading"></Loading>
-      <Plus v-else></Plus>
+      <el-icon v-else><Plus></Plus></el-icon>
       <!-- <div class="ant-upload-text">上传</div> -->
     </div>
   </el-upload>

@@ -1,19 +1,6 @@
 <template>
   <div class="container">
-    <STable
-      :data="data"
-      :columns="columns"
-      :page-options="pageOptions"
-      :handle-row="handleRowOptions"
-      :view-form-options="viewFormOptions"
-      selection-row
-      click-row-to-view
-      :fetch-data="fetchData"
-      :fetch-create="fetchCreate"
-      :fetch-edit="fetchEdit"
-      :fetch-remove="fetchRemove"
-      :fetch-batch-remove="fetchBatchRemove"
-    />
+    <STable :data="data" :columns="columns" :page-options="pageOptions" index selection click-row-to-view :fetch-data="fetchData" :fetch-create="fetchCreate" :fetch-edit="fetchEdit" :fetch-remove="fetchRemove" @selectionChange="selectionChange" />
   </div>
 </template>
 <script>
@@ -22,15 +9,9 @@ import api from "@/api"
 export default {
   data() {
     return {
-      handleRowOptions: {
-        fixed: "right",
-      },
       pageOptions: {
         total: 0,
         pageSize: 10,
-      },
-      viewFormOptions: {
-        type: "Drawer",
       },
       data: [],
       columns: getColumns(),
@@ -91,18 +72,8 @@ export default {
         })
       })
     },
-    fetchBatchRemove(selectedData) {
-      const data = {
-        ids: selectedData.map((item) => item.id),
-      }
-
-      return new Promise((resolve, reject) => {
-        Promise.then(() => {
-          resolve(data)
-        }).catch((err) => {
-          reject(err)
-        })
-      })
+    selectionChange(rows) {
+      console.log("row", rows)
     },
   },
 }

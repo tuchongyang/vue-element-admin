@@ -8,20 +8,17 @@ export function getColumns() {
           label: "姓名",
           prop: "name",
           width: 140,
-          sortable: "custom",
           filter: {
             component: "input",
           },
           form: {
-            formItem: {
-              rules: [
-                {
-                  required: true,
-                  trigger: "blur",
-                  message: "请输入用户姓名",
-                },
-              ],
-            },
+            rules: [
+              {
+                required: true,
+                trigger: "blur",
+                message: "请输入用户姓名",
+              },
+            ],
           },
         },
         {
@@ -31,17 +28,14 @@ export function getColumns() {
           filter: {
             component: "input",
           },
-          sortable: "custom",
           form: {
-            formItem: {
-              rules: [
-                {
-                  required: true,
-                  trigger: "blur",
-                  message: "请输入登录账号",
-                },
-              ],
-            },
+            rules: [
+              {
+                required: true,
+                trigger: "blur",
+                message: "请输入登录账号",
+              },
+            ],
           },
         },
       ],
@@ -54,6 +48,7 @@ export function getColumns() {
       filter: {
         component: "input",
       },
+      sortable: true,
       form: {
         component: "input",
         rules: [
@@ -110,9 +105,6 @@ export function getColumns() {
         ],
         value: 1,
       },
-      dict: {
-        url: "/api/icrud/role",
-      },
     },
     {
       label: "性别",
@@ -127,9 +119,6 @@ export function getColumns() {
         component: "radio",
         value: 1,
       },
-      dict: {
-        url: "/api/icrud/gender",
-      },
     },
     {
       label: "状态",
@@ -139,22 +128,9 @@ export function getColumns() {
       filter: {
         component: "select",
       },
-
-      componentName: "Radio",
-      component: {
-        formatBadge: true,
-      },
       form: {
         component: "radio",
         value: 1,
-      },
-      addForm: {
-        component: {
-          value: "1",
-        },
-      },
-      dict: {
-        url: "/api/icrud/status",
       },
     },
     {
@@ -167,9 +143,7 @@ export function getColumns() {
           format: "YYYY/MM/DD",
           valueFormat: "YYYY/MM/DD",
         },
-      },
-      addForm: {
-        show: false,
+        hidden: (form) => !form.id,
       },
     },
     {
@@ -188,7 +162,6 @@ export function getColumns() {
       label: "个人介绍",
       prop: "desc",
       width: 140,
-      show: false,
       showOverflowTooltip: true,
       form: {
         component: "input",

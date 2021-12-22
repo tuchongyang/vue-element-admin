@@ -1,5 +1,5 @@
 <template>
-  <el-input v-model:value="modelValue" type="password" v-bind="formItem.props" :placeholder="(formItem.props && formItem.props.placeholder) || '请输入' + formItem.label" autocomplete="new-password" v-on="formItem.eventObject" />
+  <el-input v-model="modelValue" type="password" v-bind="formItem.props" :placeholder="(formItem.props && formItem.props.placeholder) || '请输入' + formItem.label" autocomplete="new-password" v-on="formItem.eventObject" />
 </template>
 <script>
 import { defineComponent, computed } from "vue"

@@ -1,18 +1,25 @@
 <template>
   <div class="table-container">
-    <STableFilter :schema="filterSchema" @search="onSearch" v-show="filterVisible" />
+    <STableFilter :schema="filterSchema" @search="onSearch" v-show="filterSchema.length && filterVisible" />
     <div class="table-control">
       <div class="btn-control">
         <el-button type="primary" size="mini" @click="create()">
           <el-icon><plus /></el-icon>
           添加
         </el-button>
+        <slot name="menuLeft"></slot>
       </div>
       <div class="min-control"><STableMenu :filterVisible="filterVisible" @operation="onMenuOption" /></div>
     </div>
-    <el-table border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick">
+    <el-table border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick" @selection-change="selectionChange">
+      <el-table-column type="index" v-if="$attrs.index !== 'undefined'" />
+      <el-table-column type="selection" v-if="$attrs.selection !== 'undefined'" />
       <template v-for="item in columns" :key="item.label">
         <el-table-column v-bind="getColumnAttrs(item)" v-if="!item.hidden">
+          <template #header>
+            <template v-if="!$slots[item.prop + 'Header']">{{ item.label }}</template>
+            <slot :name="item.prop + 'Header'" :column="item"></slot>
+          </template>
           <template #default="scope">
             <template v-if="item.children && item.children.length">
               <template v-for="sub in item.children" :key="sub.prop">
@@ -23,26 +30,55 @@
           </template>
         </el-table-column>
       </template>
-      <el-table-column label="操作" fixed="right" :width="option.optionWidth || '180'">
+      <el-table-column label="操作" fixed="right" :width="option.menuWidth || '180'">
         <template #default="scope">
-          <el-button type="text" @click="create(scope.row)">
-            <el-icon><edit /></el-icon> 编辑
-          </el-button>
-          <el-button type="text" @click="detail(scope.row)">
-            <el-icon><document /></el-icon> 详情
-          </el-button>
-          <el-button type="text" style="color: #ff0000" @click.stop="startremove(scope)">
-            <el-icon><delete /></el-icon> 删除
-          </el-button>
+          <template v-if="!$slots.menuBtn">
+            <el-button type="text" @click.stop="create(scope.row)">
+              <el-icon><edit /></el-icon> 编辑
+            </el-button>
+            <el-button type="text" @click.stop="detail(scope.row)">
+              <el-icon><document /></el-icon> 详情
+            </el-button>
+            <el-button type="text" style="color: #ff0000" @click.stop="startremove(scope)">
+              <el-icon><delete /></el-icon> 删除
+            </el-button>
+          </template>
+          <el-dropdown trigger="click" v-else>
+            <el-button type="text">
+              {{ props.option.menuBtnTitle }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>
+                  <el-button type="text" @click.stop="create(scope.row)">
+                    <el-icon><edit /></el-icon> 编辑
+                  </el-button>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <el-button type="text" @click.stop="detail(scope.row)">
+                    <el-icon><document /></el-icon> 详情
+                  </el-button>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <el-button type="text" style="color: #ff0000" @click.stop="startremove(scope)">
+                    <el-icon><delete /></el-icon> 删除
+                  </el-button>
+                </el-dropdown-item>
+                <slot name="menuBtn" v-bind="scope"></slot>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+
+          <slot name="menu" v-bind="scope"></slot>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination class="pagination" background layout="total, sizes, prev, pager, next, jumper" :total="props.pageOptions.total" v-model:current-page="listQuery.pageIndex" v-model:page-size="listQuery.pageSize" @current-change="fetchData" @size-change="fetchData"> </el-pagination>
+    <el-pagination class="pagination" background layout="total, sizes, prev, pager, next, jumper" :total="total" v-model:current-page="listQuery.pageIndex" v-model:page-size="listQuery.pageSize" @current-change="fetchData" @size-change="fetchData"> </el-pagination>
     <STableDetail ref="STableDetailRef" />
   </div>
 </template>
 <script setup>
-import { defineProps, computed, ref, reactive, provide, getCurrentInstance } from "vue"
+import { defineProps, defineEmits, computed, ref, reactive, provide, getCurrentInstance } from "vue"
 import STableItem from "./STableItem.vue"
 import STableFilter from "./STableFilter.vue"
 import STableMenu from "./STableMenu.vue"
@@ -98,11 +134,12 @@ const props = defineProps({
     type: Object,
     default() {
       return {
-        optionWidth: 180,
+        optionWidth: 160,
       }
     },
   },
 })
+const emits = defineEmits(["selectionChange"])
 
 const list = computed(() => {
   const result = props.data.map((item) => {
@@ -127,6 +164,8 @@ const fetchData = () => {
     })
   }
 }
+// 总数量由外面决定
+const total = computed(() => props.pageOptions.total || props.data.length || 0)
 // 组装过滤器模型
 const filterSchema = computed(() => {
   const result = []
@@ -269,6 +308,10 @@ const onRowClick = (row) => {
   if (typeof instance.attrs["click-row-to-view"] !== "undefined") {
     detail(row)
   }
+}
+// 多选事件
+const selectionChange = (rows) => {
+  emits("selectionChange", rows)
 }
 </script>
 <style lang="scss">

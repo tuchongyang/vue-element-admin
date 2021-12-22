@@ -21,4 +21,5 @@ export {
   Delete,
   Document,
   Plus,
+  ArrowDown,
 } from "@element-plus/icons-vue"

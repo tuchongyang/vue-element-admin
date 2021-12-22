@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="modelValue" :mode="formItem.mode || ''" v-bind="formItem.props" v-on="formItem.eventObject">
+  <el-select v-model="modelValue" :mode="formItem.mode || ''" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%">
     <template v-for="option in formItem.options" :key="option.value">
       <el-option :value="option.value" :label="option.label"></el-option>
     </template>

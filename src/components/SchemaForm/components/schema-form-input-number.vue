@@ -1,5 +1,5 @@
 <template>
-  <el-input-number v-model="modelValue" v-bind="formItem.props" v-on="formItem.eventObject" />
+  <el-input-number v-model="modelValue" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%" />
 </template>
 
 <script>

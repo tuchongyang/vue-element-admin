@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="schemaFormRef" :model="modelRef" :rules="rulesRef" v-bind="$attrs" style="display: flex; flex-wrap: wrap; position: relative; box-sizing: border-box">
+  <el-form ref="schemaFormRef" :model="modelRef" :rules="rulesRef" v-bind="$attrs" class="schema-form" style="display: flex; flex-wrap: wrap; position: relative; box-sizing: border-box">
     <template v-for="formItem in schemaItems" :key="formItem.field">
       <el-form-item :label="formItem.label" :prop="formItem.prop" :label-width="formItem.labelWidth" :style="{ maxWidth: (100 * formItem.span) / 24 + '%', flex: '0 0 ' + (100 * formItem.span) / 24 + '%' }">
         <component :is="getComponent(formItem.type)" v-model="modelRef[formItem.prop]" :form-item="formItem" />
@@ -19,18 +19,18 @@ import { isFunction, isAsyncFunction } from "@/utils/is"
 import components from "./components"
 
 export default defineComponent({
-  name: "DynamicForm",
+  name: "SchemaForm",
   components: {
     ...components,
   },
   props: {
+    // 动态验证表单
     formSchema: {
-      // 动态验证表单
       required: true,
       type: Object,
     },
+    // 预置字段默认值
     fields: {
-      // 预置字段默认值
       type: Object,
       default: () => ({}),
     },
@@ -121,4 +121,10 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.schema-form {
+  .el-form-item {
+    flex: 0 0 100%;
+  }
+}
+</style>

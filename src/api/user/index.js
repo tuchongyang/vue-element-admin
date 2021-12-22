@@ -84,4 +84,19 @@ export default {
       }, 1000)
     })
   },
+  types() {
+    return new Promise((resolve) => {
+      let list = [
+        { id: 1, name: "分类1" },
+        { id: 2, name: "分类2" },
+        { id: 3, name: "分类3" },
+      ]
+      setTimeout(() => {
+        resolve({
+          data: list,
+          total: 12,
+        })
+      }, 1000)
+    })
+  },
 }

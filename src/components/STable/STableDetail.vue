@@ -5,8 +5,11 @@
         <div class="item-col">
           <div class="label">{{ item.label }}：</div>
           <div class="det">
-            <template v-if="!item.options">{{ item.value }}</template>
-            <ConstantStatus :value="item.value" :options="item.options" />
+            <ConstantStatus v-if="item.options" :value="item.value" :options="item.options" />
+            <template v-else-if="item.form && item.form.component == 'file'">
+              <el-image :src="item.value" :preview-src-list="[item.value]" style="width: 40px; height: 40px; vertical-align: top" fit="cover"></el-image>
+            </template>
+            <template v-else>{{ item.value }}</template>
           </div>
         </div>
       </el-col>
@@ -35,6 +38,7 @@ const open = (option) => {
           value: option.data[a.prop],
           span: (a.form && a.form.span) || 12,
           options: a.options,
+          form: a.form,
         })
       }
     } else {
@@ -44,6 +48,7 @@ const open = (option) => {
         value: option.data[item.prop],
         span: (item.form && item.form.span) || 12,
         options: item.options,
+        form: item.form,
       })
     }
   })
@@ -64,6 +69,7 @@ defineExpose({ open })
     background: #fafafa;
     line-height: 32px;
     border: 1px solid #fff;
+    height: 100%;
     .label {
       padding: 2px 10px;
       color: #909399;
@@ -80,6 +86,8 @@ defineExpose({ open })
       background-color: #fff;
       margin-left: 90px;
       min-height: 36px;
+      height: 100%;
+      word-break: break-all;
     }
   }
 }
