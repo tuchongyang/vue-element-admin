@@ -3,7 +3,8 @@ import { createRouter, createWebHistory } from "vue-router"
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Dashboard",
+    meta: { title: "主页", icon: "House" },
     component: () => import("@/components/Layout/BasicLayout"),
     children: [
       {

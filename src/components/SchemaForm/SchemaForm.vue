@@ -123,8 +123,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .schema-form {
-  .el-form-item {
-    flex: 0 0 100%;
+  &:not(.el-form--inline) {
+    .el-form-item {
+      flex: 0 0 100%;
+    }
   }
 }
 </style>

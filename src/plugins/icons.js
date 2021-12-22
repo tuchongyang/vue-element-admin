@@ -6,6 +6,7 @@ export {
   Grid,
   CircleCheck,
   Remove,
+  Bell,
   // 表格组件需要用到的图标
   Refresh,
   Search,

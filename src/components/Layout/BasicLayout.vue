@@ -3,9 +3,13 @@
     <s-aside />
     <el-container>
       <el-header class="a-header">
-        <SAsideToggle />
-        <div class="header-right"></div>
+        <div class="header-left">
+          <SAsideToggle />
+          <Breadcrumb />
+        </div>
+        <div class="header-right"><SHeaderRight /></div>
       </el-header>
+      <TagsView />
       <el-main>
         <router-view />
       </el-main>
@@ -16,6 +20,9 @@
 <script setup>
 import SAside from "./SAside"
 import SAsideToggle from "./SAsideToggle"
+import Breadcrumb from "./Breadcrumb"
+import TagsView from "./TagsView"
+import SHeaderRight from "./SHeaderRight"
 </script>
 <style scoped lang="scss">
 .a-aside {
@@ -25,7 +32,9 @@ import SAsideToggle from "./SAsideToggle"
 .a-header {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  height: 64px;
-  line-height: 64px;
+  height: $header-height;
+  line-height: $header-height;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

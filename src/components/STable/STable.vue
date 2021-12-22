@@ -1,6 +1,6 @@
 <template>
   <div class="table-container">
-    <STableFilter :schema="filterSchema" @search="onSearch" v-show="filterSchema.length && filterVisible" />
+    <STableFilter :schema="filterSchema" @search="onSearch" v-show="filterSchema.formItem.length && filterVisible" />
     <div class="table-control">
       <div class="btn-control">
         <el-button type="primary" size="mini" @click="create()">
@@ -178,7 +178,7 @@ const filterSchema = computed(() => {
       }
       if (a.filter) {
         const options = a.options || []
-        options.unshift({ label: "全部", value: "" })
+        !options.some((a) => a.label == "全部") && options.unshift({ label: "全部", value: "" })
         result.push({
           type: a.filter.component || "input",
           label: a.label,
@@ -328,6 +328,7 @@ const selectionChange = (rows) => {
   .table-control {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
 }
 </style>

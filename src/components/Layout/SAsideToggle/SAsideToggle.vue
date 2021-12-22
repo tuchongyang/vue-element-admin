@@ -13,9 +13,12 @@ const toggle = () => {
 }
 // console.log("sideOpen", sideOpen)
 </script>
-<style scoped>
+<style scoped lang="scss">
 .aside-toggle {
   cursor: pointer;
   display: inline-block;
+  vertical-align: top;
+  line-height: $header-height;
+  margin-right: 15px;
 }
 </style>
