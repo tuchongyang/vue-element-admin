@@ -94,6 +94,20 @@ const routes = [
           },
         ],
       },
+      {
+        path: "/setting",
+        name: "setting",
+        meta: { title: "设置", icon: "Setting" },
+        component: () => import("@/components/Layout/EmptyLayout"),
+        children: [
+          {
+            path: "theme",
+            name: "theme",
+            meta: { title: "主题" },
+            component: () => import("@/views/setting/ThemeSetting"),
+          },
+        ],
+      },
       // 404 page must be placed at the end !!!
       // using pathMatch install of "*" in vue-router 4.0
       { path: "/:pathMatch(.*)", redirect: "/404", hidden: true },

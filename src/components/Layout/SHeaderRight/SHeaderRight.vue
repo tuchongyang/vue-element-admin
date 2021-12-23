@@ -4,7 +4,7 @@
   </el-button>
   <el-dropdown trigger="click" class="item-avatar">
     <span class="toggle">
-      <el-avatar class="avatar" :size="35" :src="circleUrl"></el-avatar><span>管理员</span> <el-icon><arrow-down /></el-icon
+      <el-avatar class="avatar" :size="30" :src="circleUrl"></el-avatar><span>管理员</span> <el-icon><arrow-down /></el-icon
     ></span>
     <template #dropdown>
       <el-dropdown-menu>
@@ -26,11 +26,11 @@ const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1ep
   color: $font-color;
 }
 .item-bell {
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 15px;
 }
 .item-avatar {
-  margin-top: 7px;
+  margin-top: 10px;
   vertical-align: top;
   .avatar {
     vertical-align: middle;

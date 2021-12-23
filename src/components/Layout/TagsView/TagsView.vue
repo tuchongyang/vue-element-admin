@@ -203,8 +203,9 @@ let { visible, top, left, selectedTag } = toRefs(state)
   height: $tagViewHeight;
   width: 100%;
   background: #fff;
-  border-bottom: 1px solid #d8dce5;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  z-index: 5;
   .tags-view-wrapper {
     .tags-view-item {
       display: inline-block;
@@ -212,8 +213,8 @@ let { visible, top, left, selectedTag } = toRefs(state)
       cursor: pointer;
       height: 27px;
       line-height: 26px;
-      border: 1px solid #d8dce5;
-      color: #495060;
+      border: 1px solid #eee;
+      color: #777;
       background: #fff;
       padding: 0 8px;
       font-size: 12px;
@@ -227,9 +228,9 @@ let { visible, top, left, selectedTag } = toRefs(state)
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
-        color: #fff;
-        border-color: #42b983;
+        // background-color: #42b983;
+        color: $color-primary;
+        // border-color: #444;
         &::before {
           content: "";
           background: #fff;
