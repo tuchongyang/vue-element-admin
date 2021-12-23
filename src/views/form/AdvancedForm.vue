@@ -1,18 +1,44 @@
 <template>
   <div class="advanced-form">
-    <div class="title-bar" style="text-align: center; margin-bottom: 40px"><b>高级表单</b></div>
-    <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
-      <template v-slot:operate-button>
-        <div style="text-align: center">
-          <el-button type="primary" @click="submit">提 交</el-button>
-          <el-button type="default" @click="clear">清 空</el-button>
-        </div>
-      </template>
-    </schema-form>
+    <PageHeader title="高级表单" />
+    <el-card shadow="never" style="margin-bottom: 20px">
+      <template #header> 用户信息 </template>
+      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
+        <template v-slot:operate-button>
+          <div style="text-align: center">
+            <el-button type="primary" @click="submit">提 交</el-button>
+            <el-button type="default" @click="clear">清 空</el-button>
+          </div>
+        </template>
+      </schema-form>
+    </el-card>
+    <el-card shadow="never" style="margin-bottom: 20px">
+      <template #header> 用户信息 </template>
+      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
+        <template v-slot:operate-button>
+          <div style="text-align: center">
+            <el-button type="primary" @click="submit">提 交</el-button>
+            <el-button type="default" @click="clear">清 空</el-button>
+          </div>
+        </template>
+      </schema-form>
+    </el-card>
+    <el-card shadow="never" style="margin-bottom: 20px">
+      <template #header> 用户信息 </template>
+      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
+        <template v-slot:operate-button>
+          <div style="text-align: center">
+            <el-button type="primary" @click="submit">提 交</el-button>
+            <el-button type="default" @click="clear">清 空</el-button>
+          </div>
+        </template>
+      </schema-form>
+    </el-card>
   </div>
 </template>
 <script setup>
 import { ref, getCurrentInstance } from "vue"
+import PageHeader from "@/components/Layout/PageHeader"
 import api from "@/api"
 const formSchema = {
   formItem: [
