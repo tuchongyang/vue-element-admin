@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-    <STable :data="data" :columns="columns" :page-options="pageOptions" index selection click-row-to-view :fetch-data="fetchData" :fetch-create="fetchCreate" :fetch-edit="fetchEdit" :fetch-remove="fetchRemove" @selectionChange="selectionChange" />
+    <PageHeader title="基础表格" desc="表格查询的复杂示例" />
+    <div class="box-white">
+      <STable :data="data" :columns="columns" :page-options="pageOptions" index selection click-row-to-view :fetch-data="fetchData" :fetch-create="fetchCreate" :fetch-edit="fetchEdit" :fetch-remove="fetchRemove" @selectionChange="selectionChange" />
+    </div>
   </div>
 </template>
 <script>
 import { getColumns } from "./columns"
 import api from "@/api"
+import PageHeader from "@/components/Layout/PageHeader"
 export default {
+  components: { PageHeader },
   data() {
     return {
       pageOptions: {

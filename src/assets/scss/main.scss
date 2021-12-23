@@ -12,3 +12,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.box-white {
+  background-color: #fff;
+  padding: $body-padding;
+}

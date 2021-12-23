@@ -10,7 +10,7 @@
         <div class="header-right"><SHeaderRight /></div>
       </el-header>
       <TagsView />
-      <el-main>
+      <el-main class="center-main">
         <router-view />
       </el-main>
       <el-footer>Footer</el-footer>
@@ -36,5 +36,9 @@ import SHeaderRight from "./SHeaderRight"
   line-height: $header-height;
   display: flex;
   justify-content: space-between;
+}
+.center-main {
+  background: $body-background;
+  padding: $body-padding;
 }
 </style>
