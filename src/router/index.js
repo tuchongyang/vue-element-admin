@@ -86,6 +86,12 @@ const routes = [
             meta: { title: "基础表单" },
             component: () => import("@/views/form/CustomForm"),
           },
+          {
+            path: "advancedForm",
+            name: "advancedForm",
+            meta: { title: "高级表单" },
+            component: () => import("@/views/form/AdvancedForm"),
+          },
         ],
       },
       // 404 page must be placed at the end !!!
