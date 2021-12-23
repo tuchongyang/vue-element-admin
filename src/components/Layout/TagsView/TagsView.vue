@@ -200,11 +200,11 @@ let { visible, top, left, selectedTag } = toRefs(state)
 
 <style lang="scss" scoped>
 .tags-view-container {
-  height: $tagViewHeight;
   width: 100%;
   background: #fff;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+  border-top: 1px solid var(--el-border-color-light);
+  border-bottom: 1px solid var(--el-border-color-light);
+  // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   z-index: 5;
   .tags-view-wrapper {
     .tags-view-item {
@@ -213,14 +213,15 @@ let { visible, top, left, selectedTag } = toRefs(state)
       cursor: pointer;
       height: 27px;
       line-height: 26px;
-      border: 1px solid #eee;
+      border: 1px solid var(--el-border-color-light);
       color: #777;
       background: #fff;
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
-      margin-top: 6px;
+      margin-top: 3px;
       text-decoration: none;
+      margin-bottom: -1px;
       &:first-of-type {
         margin-left: 10px;
       }
@@ -231,15 +232,17 @@ let { visible, top, left, selectedTag } = toRefs(state)
         // background-color: #42b983;
         color: $color-primary;
         // border-color: #444;
+        border-bottom-color: #fff;
         &::before {
           content: "";
-          background: #fff;
+          background: var(--el-color-primary);
           display: inline-block;
-          width: 8px;
-          height: 8px;
+          width: 4px;
+          height: 4px;
           border-radius: 50%;
           position: relative;
-          margin-right: 2px;
+          margin-right: 4px;
+          vertical-align: middle;
         }
       }
     }
@@ -272,7 +275,7 @@ let { visible, top, left, selectedTag } = toRefs(state)
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
-    border-radius: 3px;
+    border-radius: 3px 3px 0 0;
     .el-icon-close {
       border-radius: 6px;
       width: 12px;

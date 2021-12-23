@@ -18,7 +18,12 @@ const toggle = () => {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
-  line-height: $header-height;
+  height: $header-height;
   margin-right: 15px;
+  padding-top: 16px;
+  .el-icon {
+    vertical-align: top;
+    font-size: 18px;
+  }
 }
 </style>

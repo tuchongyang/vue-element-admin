@@ -1,5 +1,5 @@
 <template>
-  <el-menu :collapse="isCollapse" :default-active="defaultActive" :router="true" active-text-color="#ffd04b" background-color="#191919" class="s-menu" text-color="#fff">
+  <el-menu :collapse="isCollapse" :default-active="defaultActive" :router="true" v-bind="themeColor" class="s-menu">
     <template v-for="(item, i) in routes" :key="i">
       <SMenuItem :menu="item" />
     </template>
@@ -33,10 +33,37 @@ const getChildren = (childrens, parentPath) => {
 }
 const routes = getChildren(rootRoute.children, "")
 const defaultActive = computed(() => route.path)
+
+const themeColor = computed(() => {
+  const sideBg = store.state.layout.sideBg
+  let colorObj = {
+    "active-text-color": "var(--el-color-primary: #409eff)",
+    "background-color": sideBg,
+    "text-color": "rgba(255,255,255,.7)",
+  }
+  if (store.state.layout.sideTheme == "light") {
+    colorObj = {
+      "active-text-color": "var(--el-color-primary: #409eff)",
+      "background-color": sideBg,
+      "text-color": "#666",
+    }
+  }
+  return colorObj
+})
 // console.log("router", routes)
 </script>
 <style scoped lang="scss">
 .s-menu {
   border: 0;
+  :deep(.el-menu-item:hover) {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--el-color-primary);
+  }
+  :deep(.el-menu-item.is-active) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  :deep(.el-sub-menu .el-menu) {
+    background: rgba(0, 0, 0, 0.3);
+  }
 }
 </style>

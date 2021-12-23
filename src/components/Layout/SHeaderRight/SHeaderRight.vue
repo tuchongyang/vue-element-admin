@@ -1,10 +1,8 @@
 <template>
-  <el-button type="text" class="menu-item item-bell">
-    <el-icon :size="20"><Bell /></el-icon>
-  </el-button>
-  <el-dropdown trigger="click" class="item-avatar">
+  <MessageCenter class="menu-item" />
+  <el-dropdown trigger="click" class="menu-item item-avatar">
     <span class="toggle">
-      <el-avatar class="avatar" :size="30" :src="circleUrl"></el-avatar><span>管理员</span> <el-icon><arrow-down /></el-icon
+      <el-avatar class="avatar" :size="30" :src="circleUrl"></el-avatar><span class="name">管理员</span> <el-icon><arrow-down /></el-icon
     ></span>
     <template #dropdown>
       <el-dropdown-menu>
@@ -15,23 +13,25 @@
   </el-dropdown>
 </template>
 <script setup>
+import MessageCenter from "./MessageCenter.vue"
 const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
 </script>
 <style scoped lang="scss">
 .menu-item {
   vertical-align: top;
-  padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  height: 100%;
   color: $font-color;
+  cursor: pointer;
+  &:hover {
+    background: var(--el-bg-color);
+  }
 }
-.item-bell {
-  font-size: 16px;
-  padding-top: 15px;
-}
+
 .item-avatar {
-  margin-top: 10px;
   vertical-align: top;
+  padding-top: 10px;
   .avatar {
     vertical-align: middle;
   }
@@ -39,6 +39,8 @@ const circleUrl = "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1ep
     cursor: pointer;
     span {
       vertical-align: middle;
+    }
+    .name {
       margin-left: 10px;
     }
     .el-icon {

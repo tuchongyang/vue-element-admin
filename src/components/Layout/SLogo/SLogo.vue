@@ -1,9 +1,9 @@
 <template>
   <div class="s-logo">LOGO</div>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .s-logo {
-  line-height: 64px;
+  line-height: $header-height;
   text-align: center;
 }
 </style>

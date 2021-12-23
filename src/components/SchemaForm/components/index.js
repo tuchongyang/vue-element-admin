@@ -7,5 +7,6 @@ import SchemaFormSwitch from "./schema-form-switch.vue"
 import SchemaFormFile from "./schema-form-file.vue"
 import SchemaFormInputPassword from "./schema-form-input-password.vue"
 import SchemaFormDatePicker from "./schema-form-date-picker.vue"
+import SchemaFormColorPicker from "./schema-form-color-picker.vue"
 
-export default { SchemaFormCheckbox, SchemaFormInputNumber, SchemaFormInput, SchemaFormRadio, SchemaFormSelect, SchemaFormSwitch, SchemaFormFile, SchemaFormInputPassword, SchemaFormDatePicker }
+export default { SchemaFormCheckbox, SchemaFormInputNumber, SchemaFormInput, SchemaFormRadio, SchemaFormSelect, SchemaFormSwitch, SchemaFormFile, SchemaFormInputPassword, SchemaFormDatePicker, SchemaFormColorPicker }

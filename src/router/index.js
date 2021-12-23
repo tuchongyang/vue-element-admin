@@ -95,6 +95,26 @@ const routes = [
         ],
       },
       {
+        path: "/detail",
+        name: "detail",
+        meta: { title: "详情", icon: "Document" },
+        component: () => import("@/components/Layout/EmptyLayout"),
+        children: [
+          {
+            path: "customDetail",
+            name: "customDetail",
+            meta: { title: "基础详情" },
+            component: () => import("@/views/detail/CustomDetail"),
+          },
+          {
+            path: "advancedDetail",
+            name: "advancedDetail",
+            meta: { title: "高级详情" },
+            component: () => import("@/views/detail/CustomDetail"),
+          },
+        ],
+      },
+      {
         path: "/setting",
         name: "setting",
         meta: { title: "设置", icon: "Setting" },

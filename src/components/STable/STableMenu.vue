@@ -45,7 +45,7 @@ const controlButtons = computed(() => [
     ],
   },
   { label: "导出数据", value: "export", icon: "Download" },
-  { label: "打印", value: "print", icon: "Printer" },
+  // { label: "打印", value: "print", icon: "Printer" },
   { label: "列设置", value: "operation", icon: "Operation" },
 ])
 const visible = ref(false)

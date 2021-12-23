@@ -3,17 +3,17 @@
     <STableFilter :schema="filterSchema" @search="onSearch" v-show="filterSchema.formItem.length && filterVisible" />
     <div class="table-control">
       <div class="btn-control">
-        <el-button type="primary" size="mini" @click="create()">
+        <el-button type="primary" size="mini" @click="create()" v-if="!option.hideBtnAdd">
           <el-icon><plus /></el-icon>
           添加
         </el-button>
         <slot name="menuLeft"></slot>
       </div>
-      <div class="min-control"><STableMenu :filterVisible="filterVisible" @operation="onMenuOption" /></div>
+      <div class="min-control" v-if="!option.hideMenu"><STableMenu :filterVisible="filterVisible" @operation="onMenuOption" /></div>
     </div>
     <el-table id="table" border :data="list" v-loading="loading" v-bind="tableAttrs" @row-click="onRowClick" @selection-change="selectionChange">
-      <el-table-column type="index" v-if="$attrs.index !== 'undefined'" />
-      <el-table-column type="selection" v-if="$attrs.selection !== 'undefined'" />
+      <el-table-column type="index" v-if="$attrs.index !== undefined" />
+      <el-table-column type="selection" v-if="$attrs.selection !== undefined" />
       <template v-for="item in columns" :key="item.label">
         <el-table-column v-bind="getColumnAttrs(item)" v-if="!item.hidden">
           <template #header>
@@ -30,7 +30,7 @@
           </template>
         </el-table-column>
       </template>
-      <el-table-column label="操作" fixed="right" :width="option.menuWidth || '180'">
+      <el-table-column label="操作" fixed="right" :width="option.menuWidth || '180'" v-if="!option.hideOperation">
         <template #default="scope">
           <template v-if="!$slots.menuBtn">
             <el-button type="text" @click.stop="create(scope.row)">
@@ -73,7 +73,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination class="pagination" background layout="total, sizes, prev, pager, next, jumper" :total="total" v-model:current-page="listQuery.pageIndex" v-model:page-size="listQuery.pageSize" @current-change="fetchData" @size-change="fetchData"> </el-pagination>
+    <el-pagination v-if="!option.pageHide" class="pagination" background layout="total, sizes, prev, pager, next, jumper" :total="total" v-model:current-page="listQuery.pageIndex" v-model:page-size="listQuery.pageSize" @current-change="fetchData" @size-change="fetchData"> </el-pagination>
     <STableDetail ref="STableDetailRef" />
   </div>
 </template>
@@ -136,6 +136,10 @@ const props = defineProps({
     default() {
       return {
         optionWidth: 160,
+        hideMenu: false, // 是否隐藏右侧工具菜单
+        hideOperation: false, // 是否隐藏操作列
+        hideBtnAdd: false, // 是否隐藏添加按钮
+        pageHide: false, // 是否隐藏分页器
       }
     },
   },

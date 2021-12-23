@@ -90,7 +90,7 @@ export default defineComponent({
       )
     })
 
-    const preset = ["input", "select", "radio", "checkbox", "input-number", "input-range", "switch", "file", "input-password", "date-picker"]
+    const preset = ["input", "select", "radio", "checkbox", "input-number", "input-range", "switch", "file", "input-password", "date-picker", "color-picker"]
 
     // 获取组件名称
     const getComponent = (type) => {
