@@ -1,44 +1,27 @@
 <template>
-  <div class="advanced-form">
+  <div class="advanced-form has-footer">
     <PageHeader title="高级表单" />
-    <el-card shadow="never" style="margin-bottom: 20px">
-      <template #header> 用户信息 </template>
-      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
-        <template v-slot:operate-button>
-          <div style="text-align: center">
-            <el-button type="primary" @click="submit">提 交</el-button>
-            <el-button type="default" @click="clear">清 空</el-button>
-          </div>
-        </template>
-      </schema-form>
-    </el-card>
-    <el-card shadow="never" style="margin-bottom: 20px">
-      <template #header> 用户信息 </template>
-      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
-        <template v-slot:operate-button>
-          <div style="text-align: center">
-            <el-button type="primary" @click="submit">提 交</el-button>
-            <el-button type="default" @click="clear">清 空</el-button>
-          </div>
-        </template>
-      </schema-form>
-    </el-card>
-    <el-card shadow="never" style="margin-bottom: 20px">
-      <template #header> 用户信息 </template>
-      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px">
-        <template v-slot:operate-button>
-          <div style="text-align: center">
-            <el-button type="primary" @click="submit">提 交</el-button>
-            <el-button type="default" @click="clear">清 空</el-button>
-          </div>
-        </template>
-      </schema-form>
-    </el-card>
+    <BaseInfo title="用户信息" type="card">
+      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </schema-form>
+    </BaseInfo>
+    <BaseInfo title="行程信息" type="card">
+      <schema-form ref="dynamicForm1" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </schema-form>
+    </BaseInfo>
+    <BaseInfo title="同行人员" type="card">
+      <STable :data="tableData" :columns="columns" :option="option" />
+    </BaseInfo>
+    <PageFooter>
+      <template #right>
+        <el-button type="primary" @click="submit">提 交</el-button>
+        <el-button type="default" @click="clear">清 空</el-button>
+      </template>
+    </PageFooter>
   </div>
 </template>
 <script setup>
 import { ref, getCurrentInstance } from "vue"
 import PageHeader from "@/components/Layout/PageHeader"
+import PageFooter from "@/components/Layout/PageFooter"
 import api from "@/api"
 const formSchema = {
   formItem: [
@@ -142,5 +125,26 @@ const submit = () => {
 }
 const clear = () => {
   dynamicForm.value.schemaFormRef.resetFields()
+}
+
+const tableData = [
+  { no: "123123", name: "矿泉水 550ml", code: "12313123123123", price: 2, count: 1, amount: 2 },
+  { no: "123123", name: "矿泉水 550ml", code: "12313123123123", price: 2, count: 1, amount: 2 },
+  { no: "123123", name: "矿泉水 550ml", code: "12313123123123", price: 2, count: 1, amount: 2 },
+  { no: "123123", name: "矿泉水 550ml", code: "12313123123123", price: 2, count: 1, amount: 2 },
+]
+const columns = [
+  { prop: "no", label: "商品编号" },
+  { prop: "name", label: "商品名称" },
+  { prop: "code", label: "商品条码" },
+  { prop: "price", label: "单价" },
+  { prop: "count", label: "数量（件）" },
+  { prop: "amount", label: "金额" },
+]
+const option = {
+  hideMenu: true,
+  hideOperation: true,
+  hideBtnAdd: true,
+  pageHide: true,
 }
 </script>

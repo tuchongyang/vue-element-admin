@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <BaseInfo type="card">
     <STable :data="data" :columns="columns" :option="option" height="200px">
       <template #nameHeader="scope">
         <el-tag>{{ scope }}</el-tag>
       </template>
     </STable>
-  </div>
+  </BaseInfo>
 </template>
 <script setup>
 const data = [

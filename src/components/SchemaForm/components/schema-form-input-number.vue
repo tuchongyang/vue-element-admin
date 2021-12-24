@@ -1,5 +1,5 @@
 <template>
-  <el-input-number v-model="modelValue" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%" />
+  <el-input-number v-model="model" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%" />
 </template>
 
 <script>
@@ -14,17 +14,17 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
-    value: undefined, // 表单项值
+    modelValue: undefined, // 表单项值
   },
-  emits: ["update:value"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const modelValue = computed({
-      get: () => props.value,
-      set: (val) => emit("update:value", val),
+    const model = computed({
+      get: () => props.modelValue,
+      set: (val) => emit("update:modelValue", val),
     })
 
     return {
-      modelValue,
+      model,
     }
   },
 })

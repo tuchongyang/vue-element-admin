@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="modelValue" :mode="formItem.mode || ''" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%">
+  <el-select v-model="model" :mode="formItem.mode || ''" v-bind="formItem.props" v-on="formItem.eventObject" style="width: 100%">
     <template v-for="option in formItem.options" :key="option.value">
       <el-option :value="option.value" :label="option.label"></el-option>
     </template>
@@ -16,17 +16,17 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
-    value: undefined, // 表单项值
+    modelValue: undefined, // 表单项值
   },
-  emits: ["update:value"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const modelValue = computed({
-      get: () => props.value,
-      set: (val) => emit("update:value", val),
+    const model = computed({
+      get: () => props.modelValue,
+      set: (val) => emit("update:modelValue", val),
     })
 
     return {
-      modelValue,
+      model,
     }
   },
 })

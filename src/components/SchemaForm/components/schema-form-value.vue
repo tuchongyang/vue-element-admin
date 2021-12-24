@@ -1,17 +1,11 @@
 <template>
-  <el-radio-group v-model="model" v-on="formItem.eventObject">
-    <template v-for="option in formItem.options" :key="option.value">
-      <el-radio :label="option.value">
-        {{ option.label }}
-      </el-radio>
-    </template>
-  </el-radio-group>
+  <div v-html="model"></div>
 </template>
 <script>
 import { defineComponent, computed } from "vue"
 
 export default defineComponent({
-  name: "SchemaFormRadio",
+  name: "SchemaFormInput",
   components: {},
   props: {
     formItem: {
@@ -23,6 +17,7 @@ export default defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
+    console.log("props.value", props.modelValue, "formItem", props.formItem.prop)
     const model = computed({
       get: () => props.modelValue,
       set: (val) => emit("update:modelValue", val),

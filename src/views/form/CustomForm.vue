@@ -1,7 +1,7 @@
 <template>
   <div class="custom-form">
     <PageHeader title="基础表单" />
-    <div class="box-white">
+    <BaseInfo type="card">
       <schema-form class="center-form" ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'">
         <template v-slot:operate-button>
           <div style="text-align: center">
@@ -10,7 +10,7 @@
           </div>
         </template>
       </schema-form>
-    </div>
+    </BaseInfo>
   </div>
 </template>
 

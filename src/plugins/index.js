@@ -6,7 +6,7 @@ import * as Icons from "./icons"
 
 import FormModal from "@/components/FormModal"
 export default (app) => {
-  app.use(ElementPlus, { locale: zhCn, size: "small" })
+  app.use(ElementPlus, { locale: zhCn, size: "mini" })
   // 装载components组件
   for (const i in components) {
     const item = components[i]

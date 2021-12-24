@@ -8,6 +8,7 @@ export {
   Remove,
   Bell,
   Setting,
+  Tickets,
   // 表格组件需要用到的图标
   Refresh,
   Search,

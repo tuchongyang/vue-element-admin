@@ -6,8 +6,8 @@
     ></span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item :icon="Plus">个人中心</el-dropdown-item>
-        <el-dropdown-item :icon="CircleCheck" divided>退出登录</el-dropdown-item>
+        <el-dropdown-item>个人中心</el-dropdown-item>
+        <el-dropdown-item divided>退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>

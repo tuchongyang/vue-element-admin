@@ -1,24 +1,21 @@
 <template>
-  <PageHeader title="基础详情" desc="基础的详细信息展示" />
-  <BaseInfo type="card">
-    <BaseInfo title="退款信息" :data="data1"></BaseInfo>
-    <el-divider></el-divider>
-    <BaseInfo title="用户信息" :data="data2"></BaseInfo>
-    <el-divider></el-divider>
-    <BaseInfo title="退货商品">
-      <STable :data="tableData" :columns="columns" :option="option" />
-    </BaseInfo>
+  <PageHeader title="高级详情" desc="高级的详细信息展示" />
+  <BaseInfo title="审核流程" type="card">
+    <el-steps :active="1" align-center finish-status="success">
+      <el-step title="申请" description="申请人：Aresn"></el-step>
+      <el-step title="Leader 审批" description="审批人：张三"></el-step>
+      <el-step title="财务审批" description="审批人：Echo"></el-step>
+    </el-steps>
+  </BaseInfo>
+  <BaseInfo title="基本信息" :data="data1" type="card"></BaseInfo>
+  <BaseInfo title="行程信息" :data="data1" type="card"></BaseInfo>
+  <BaseInfo title="退货商品" type="card">
+    <STable :data="tableData" :columns="columns" :option="option" />
   </BaseInfo>
 </template>
 <script setup>
 import PageHeader from "@/components/Layout/PageHeader"
 const data1 = [
-  { label: "取货单号", value: "10000000", span: 8 },
-  { label: "状态", value: "已取货", span: 8 },
-  { label: "销售号", value: "10000000", span: 8 },
-  { label: "子订单", value: "23123123", span: 8 },
-]
-const data2 = [
   { label: "取货单号", value: "10000000", span: 8 },
   { label: "状态", value: "已取货", span: 8 },
   { label: "销售号", value: "10000000", span: 8 },

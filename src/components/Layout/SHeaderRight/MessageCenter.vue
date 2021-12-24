@@ -7,7 +7,7 @@
         </el-badge>
       </el-button>
     </template>
-    <el-tabs class="message-tabs" v-model="activeName" @tab-click="handleClick">
+    <el-tabs class="message-tabs" v-model="activeName">
       <el-tab-pane label="通知" name="1"><NoticeList /></el-tab-pane>
       <el-tab-pane label="关注" name="2">
         <el-empty description="数据空空的" :image-size="60"></el-empty>

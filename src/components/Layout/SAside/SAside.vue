@@ -1,5 +1,5 @@
 <template>
-  <el-aside class="a-aside" :class="[sideTheme]" :style="sideStyle" :width="isCollapse ? '64px' : '200px'">
+  <el-aside class="a-aside" :class="[sideTheme]" :style="sideStyle" :width="!isCollapse ? 'var(--aside-width-open)' : 'var(--aside-width-close)'">
     <SLogo />
     <SMenu />
   </el-aside>

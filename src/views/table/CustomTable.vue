@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <PageHeader title="基础表格" desc="表格查询的复杂示例" />
-    <div class="box-white">
+    <BaseInfo type="card">
       <STable :data="data" :columns="columns" :page-options="pageOptions" index selection click-row-to-view :fetch-data="fetchData" :fetch-create="fetchCreate" :fetch-edit="fetchEdit" :fetch-remove="fetchRemove" @selectionChange="selectionChange" />
-    </div>
+    </BaseInfo>
   </div>
 </template>
 <script>

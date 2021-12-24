@@ -1,5 +1,5 @@
 <template>
-  <el-checkbox-group v-model="modelValue" style="width: 100%" v-on="formItem.eventObject">
+  <el-checkbox-group v-model="model" style="width: 100%" v-on="formItem.eventObject">
     <el-row>
       <template v-for="option in formItem.options" :key="option.value">
         <el-col :span="8">
@@ -23,17 +23,17 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
-    value: undefined, // 表单项值
+    modelValue: undefined, // 表单项值
   },
-  emits: ["update:value"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const modelValue = computed({
-      get: () => props.value,
-      set: (val) => emit("update:value", val),
+    const model = computed({
+      get: () => props.modelValue,
+      set: (val) => emit("update:modelValue", val),
     })
 
     return {
-      modelValue,
+      model,
     }
   },
 })

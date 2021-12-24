@@ -45,12 +45,13 @@ export default defineComponent({
     const modelRef = reactive(
       props.formSchema.formItem.reduce((previousValue, currentValue) => {
         currentValue.eventObject ??= {}
-        previousValue[currentValue.prop] = currentValue.value || ""
+        previousValue[currentValue.prop] = currentValue.value || undefined
         return previousValue
       }, {})
     )
     // 如果有默认值，则覆盖
     props.fields && Object.assign(modelRef, props.fields)
+    console.log("modelRef", modelRef)
     // 异步设置默认数据
     props.formSchema.formItem.forEach(async (item) => {
       // 是否需要loading
@@ -90,7 +91,7 @@ export default defineComponent({
       )
     })
 
-    const preset = ["input", "select", "radio", "checkbox", "input-number", "input-range", "switch", "file", "input-password", "date-picker", "color-picker"]
+    const preset = ["input", "select", "radio", "checkbox", "input-number", "input-range", "switch", "file", "input-password", "date-picker", "color-picker", "value"]
 
     // 获取组件名称
     const getComponent = (type) => {

@@ -1,3 +1,4 @@
+@import "./reset.scss";
 * {
   margin: 0;
   padding: 0;
@@ -12,15 +13,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.box-white {
-  background-color: #fff;
-  padding: $body-padding;
+.has-footer {
+  padding-bottom: 50px;
 }
 .center-form {
   max-width: 50%;
   margin: 0 auto;
 }
+.margin-bottom {
+  margin-bottom: 20px;
+}
 :root {
   --el-menu-hover-bg-color: rgba(0, 0, 0, 0.1);
   --button-active: 1px 1px 3px rgba(0, 0, 0, 0.06) inset;
+  --aside-width-open: 200px;
+  --aside-width-close: 64px;
 }

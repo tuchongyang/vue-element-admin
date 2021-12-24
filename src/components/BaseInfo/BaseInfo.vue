@@ -1,6 +1,6 @@
 <template>
-  <div class="base-info">
-    <div class="head">
+  <div class="base-info" :class="['base-info__' + props.type]">
+    <div class="head" v-if="props.title || $slots.title">
       <div class="title" v-if="props.title">{{ props.title }}</div>
       <slot name="title"></slot>
     </div>
@@ -28,6 +28,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  type: {
+    type: String,
+    default: "",
+  },
 })
 </script>
 <style scoped lang="scss">
@@ -45,6 +49,24 @@ const props = defineProps({
     margin-bottom: 10px;
     .label {
       color: var(--el-text-color-regular);
+    }
+  }
+  &__card {
+    background: #fff;
+    margin-bottom: 20px;
+    > .head {
+      margin-bottom: 0;
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--el-border-color-light);
+      .title {
+        font-weight: normal;
+        border: 0;
+        padding: 0;
+      }
+    }
+
+    > .body {
+      padding: 15px 15px;
     }
   }
 }

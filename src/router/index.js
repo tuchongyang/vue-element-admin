@@ -15,6 +15,12 @@ const routes = [
     ],
   },
   {
+    path: "/login",
+    name: "login",
+    meta: { title: "登录", icon: "House" },
+    component: () => import("@/views/public/LoginView"),
+  },
+  {
     path: "/",
     name: "Dashboard",
     meta: { title: "主页", icon: "House" },
@@ -34,7 +40,7 @@ const routes = [
         path: "",
         name: "home",
         meta: { title: "主页", icon: "House" },
-        component: () => import("@/views/HomeView"),
+        component: () => import("@/views/home/DashboardView"),
       },
       {
         path: "/table",
@@ -92,12 +98,18 @@ const routes = [
             meta: { title: "高级表单" },
             component: () => import("@/views/form/AdvancedForm"),
           },
+          {
+            path: "stepForm",
+            name: "stepForm",
+            meta: { title: "步骤表单" },
+            component: () => import("@/views/form/StepForm"),
+          },
         ],
       },
       {
         path: "/detail",
         name: "detail",
-        meta: { title: "详情", icon: "Document" },
+        meta: { title: "详情", icon: "Tickets" },
         component: () => import("@/components/Layout/EmptyLayout"),
         children: [
           {
@@ -110,7 +122,7 @@ const routes = [
             path: "advancedDetail",
             name: "advancedDetail",
             meta: { title: "高级详情" },
-            component: () => import("@/views/detail/CustomDetail"),
+            component: () => import("@/views/detail/AdvanceDetail"),
           },
         ],
       },

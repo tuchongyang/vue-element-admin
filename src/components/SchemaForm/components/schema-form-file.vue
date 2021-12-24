@@ -22,13 +22,13 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
-    value: undefined, // 表单项值
+    modelValue: undefined, // 表单项值
   },
-  emits: ["update:value"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const modelValue = computed({
-      get: () => props.value,
-      set: (val) => emit("update:value", val),
+    const model = computed({
+      get: () => props.modelValue,
+      set: (val) => emit("update:modelValue", val),
     })
 
     const fileList = ref([])
@@ -48,7 +48,7 @@ export default defineComponent({
           imageUrl.value = info.file.response.result.url
           loading.value = false
           // })
-          modelValue.value = imageUrl.value
+          model.value = imageUrl.value
         }
       }
       if (info.file.status === "error") {
@@ -70,7 +70,7 @@ export default defineComponent({
     }
 
     return {
-      modelValue,
+      model,
       fileList,
       loading,
       imageUrl,
