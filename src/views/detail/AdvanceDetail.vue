@@ -10,7 +10,7 @@
   <BaseInfo title="基本信息" :data="data1" type="card"></BaseInfo>
   <BaseInfo title="行程信息" :data="data1" type="card"></BaseInfo>
   <BaseInfo title="退货商品" type="card">
-    <STable :data="tableData" :columns="columns" :option="option" />
+    <CurdTable :data="tableData" :columns="columns" :option="option" />
   </BaseInfo>
 </template>
 <script setup>

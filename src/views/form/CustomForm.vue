@@ -51,7 +51,7 @@ const formSchema = {
       props: {
         controlsPosition: "right",
       },
-      span: 8,
+      span: 12,
     },
   ],
 }

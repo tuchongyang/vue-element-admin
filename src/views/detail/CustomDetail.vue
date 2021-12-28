@@ -6,7 +6,7 @@
     <BaseInfo title="用户信息" :data="data2"></BaseInfo>
     <el-divider></el-divider>
     <BaseInfo title="退货商品">
-      <STable :data="tableData" :columns="columns" :option="option" />
+      <CurdTable :data="tableData" :columns="columns" :option="option" />
     </BaseInfo>
   </BaseInfo>
 </template>

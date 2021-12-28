@@ -4,7 +4,8 @@ import "element-plus/dist/index.css"
 import zhCn from "element-plus/es/locale/lang/zh-cn"
 import * as Icons from "./icons"
 
-import FormModal from "@/components/FormModal"
+import { FormDialog } from "@evue/schema-form"
+
 export default (app) => {
   app.use(ElementPlus, { locale: zhCn, size: "mini" })
   // 装载components组件
@@ -20,5 +21,5 @@ export default (app) => {
     app.component(name, item)
   }
 
-  app.use(FormModal)
+  app.use(FormDialog.install)
 }

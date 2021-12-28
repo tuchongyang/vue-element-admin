@@ -8,7 +8,7 @@
       <schema-form ref="dynamicForm1" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </schema-form>
     </BaseInfo>
     <BaseInfo title="同行人员" type="card">
-      <STable :data="tableData" :columns="columns" :option="option" />
+      <CurdTable :data="tableData" :columns="columns" :option="option" />
     </BaseInfo>
     <PageFooter>
       <template #right>

@@ -1,6 +1,6 @@
 <template>
   <BaseInfo type="card">
-    <STable :data="data" :columns="columns" :option="option" height="200px">
+    <CurdTable :data="data" :columns="columns" :option="option" height="200px">
       <template #menuBtn="scope">
         <el-dropdown-item @click.stop="tip1(scope)">自定义按钮1</el-dropdown-item>
         <el-dropdown-item divided @click.stop="tip2(scope)">自定义按钮2</el-dropdown-item>
@@ -8,7 +8,7 @@
       <template #menu="scope">
         <el-button style="margin-left: 10px" type="text" :icon="User" @click.stop="tip3(scope)">自定义按钮</el-button>
       </template>
-    </STable>
+    </CurdTable>
   </BaseInfo>
 </template>
 <script setup>

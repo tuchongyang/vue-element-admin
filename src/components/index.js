@@ -1,6 +1,6 @@
-import { STable } from "./STable"
-import { ConstantStatus } from "./ConstantStatus"
-import { SchemaForm } from "./SchemaForm"
+import { CurdTable, ConstantStatus } from "@evue/curd-table"
+
+import { SchemaForm } from "@evue/schema-form"
 import { BaseInfo } from "./BaseInfo"
 import { SCharts } from "./SCharts"
-export { STable, ConstantStatus, SchemaForm, BaseInfo, SCharts }
+export { CurdTable, ConstantStatus, SchemaForm, BaseInfo, SCharts }

@@ -1,10 +1,10 @@
 <template>
   <BaseInfo type="card">
-    <STable ref="table" :data="data" :columns="columns" :option="option" height="200px">
+    <CurdTable ref="table" :data="data" :columns="columns" :option="option" height="200px">
       <template #menuLeft>
         <el-button type="danger" size="mini" plain @click.stop="$refs.table.rowAdd()">新增</el-button>
       </template>
-    </STable>
+    </CurdTable>
   </BaseInfo>
 </template>
 <script setup>
