@@ -4,8 +4,7 @@ import "element-plus/dist/index.css"
 import zhCn from "element-plus/es/locale/lang/zh-cn"
 import * as Icons from "./icons"
 
-import { FormDialog } from "@evue/schema-form"
-
+import VueCurd from "@vue-curd/vue-curd"
 export default (app) => {
   app.use(ElementPlus, { locale: zhCn, size: "mini" })
   // 装载components组件
@@ -21,5 +20,5 @@ export default (app) => {
     app.component(name, item)
   }
 
-  app.use(FormDialog.install)
+  app.use(VueCurd)
 }

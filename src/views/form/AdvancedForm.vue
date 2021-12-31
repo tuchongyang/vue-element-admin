@@ -2,10 +2,10 @@
   <div class="advanced-form has-footer">
     <PageHeader title="高级表单" />
     <BaseInfo title="用户信息" type="card">
-      <schema-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </schema-form>
+      <curd-form ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </curd-form>
     </BaseInfo>
     <BaseInfo title="行程信息" type="card">
-      <schema-form ref="dynamicForm1" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </schema-form>
+      <curd-form ref="dynamicForm1" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'" style="margin-right: 40px"> </curd-form>
     </BaseInfo>
     <BaseInfo title="同行人员" type="card">
       <CurdTable :data="tableData" :columns="columns" :option="option" />

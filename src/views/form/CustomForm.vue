@@ -2,14 +2,14 @@
   <div class="custom-form">
     <PageHeader title="基础表单" />
     <BaseInfo type="card">
-      <schema-form class="center-form" ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'">
+      <curd-form class="center-form" ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'">
         <template v-slot:operate-button>
           <div style="text-align: center">
             <el-button type="primary" @click="submit">提 交</el-button>
             <el-button type="default" @click="clear">清 空</el-button>
           </div>
         </template>
-      </schema-form>
+      </curd-form>
     </BaseInfo>
   </div>
 </template>

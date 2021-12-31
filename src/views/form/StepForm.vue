@@ -8,13 +8,13 @@
         <el-step title="完成"></el-step>
       </el-steps>
       <template v-if="step == 1">
-        <schema-form class="center-form" ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'">
+        <curd-form class="center-form" ref="dynamicForm" :fields="fields" :form-schema="formSchema" :label-width="formSchema.labelWidth || '110px'">
           <template v-slot:operate-button>
             <div>
               <el-button type="primary" @click="next">下一步</el-button>
             </div>
           </template>
-        </schema-form>
+        </curd-form>
         <el-divider></el-divider>
         <el-alert :closable="false">
           <p><b>说明</b></p>
@@ -28,7 +28,7 @@
       <template v-if="step == 2">
         <div class="center-form">
           <el-alert class="margin-bottom" type="warning"> 确认转账后，资金将直接打入对方账户，无法退回。 </el-alert>
-          <schema-form ref="dynamicForm1" :form-schema="formSchema1" :label-width="formSchema1.labelWidth || '110px'">
+          <curd-form ref="dynamicForm1" :form-schema="formSchema1" :label-width="formSchema1.labelWidth || '110px'">
             <template v-slot:operate-button>
               <div>
                 <el-button type="primary" @click="submit" v-if="!loading">提交</el-button>
@@ -39,7 +39,7 @@
                 <el-button type="default" @click="prev" :disabled="loading">上一步</el-button>
               </div>
             </template>
-          </schema-form>
+          </curd-form>
         </div>
       </template>
       <template v-if="step == 3">
