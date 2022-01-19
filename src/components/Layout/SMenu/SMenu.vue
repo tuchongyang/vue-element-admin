@@ -1,5 +1,5 @@
 <template>
-  <el-menu :collapse="isCollapse" :default-active="defaultActive" :router="true" v-bind="themeColor" class="s-menu">
+  <el-menu :collapse="isCollapse" :default-active="defaultActive" :router="true" v-bind="{ ...themeColor, ...$attrs }" class="s-menu">
     <template v-for="(item, i) in routes" :key="i">
       <SMenuItem :menu="item" />
     </template>
@@ -10,11 +10,12 @@ import { computed } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
 import SMenuItem from "./SMenuItem.vue"
+import { deepClone } from "@/utils/common"
 const store = useStore()
 const isCollapse = computed(() => !store.state.layout.sideOpen)
 const route = useRoute()
 const router = useRouter()
-const allroutes = router.getRoutes()
+const allroutes = deepClone(router.getRoutes())
 const rootRoute = allroutes.find((a) => a.path == "/" && a.children.length)
 const getChildren = (childrens, parentPath) => {
   const result = []

@@ -35,9 +35,10 @@ const activeName = ref("1")
   padding-left: 10px;
   padding-right: 10px;
   height: 100%;
-  color: var(--el-text-color-regular);
+  color: inherit;
+  margin: 0;
   &:hover {
-    background: var(--el-bg-color);
+    background: rgba(200, 200, 200, 0.1);
   }
   .el-icon {
     font-size: 14px;

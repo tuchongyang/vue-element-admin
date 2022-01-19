@@ -11,7 +11,7 @@
     "@element-plus/icons-vue": "^0.2.4",
     "@evue/curd-table": "^0.1.7",
     "@evue/schema-form": "^0.2.4",
-    "@vue-curd/vue-curd": "^1.0.0",
+    "@vue-curd/vue-curd": "^1.0.7",
     "core-js": "^3.8.3",
     "echarts": "^5.2.2",
     "element-plus": "^1.2.0-beta.6",

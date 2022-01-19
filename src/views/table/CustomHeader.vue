@@ -4,6 +4,7 @@
       <template #nameHeader="scope">
         <el-tag>{{ scope }}</el-tag>
       </template>
+      <template #name="scope"> 名：{{ scope.row.name }} </template>
     </CurdTable>
   </BaseInfo>
 </template>
@@ -27,8 +28,8 @@ const data = [
   },
 ]
 const columns = [
-  { prop: "name", label: "姓名" },
-  { prop: "sex", label: "性别" },
+  { prop: "name", label: "姓名", "show-overflow-tooltip": true },
+  { prop: "sex", label: "性别", "show-overflow-tooltip": true },
 ]
 const option = {
   menuWidth: 200,

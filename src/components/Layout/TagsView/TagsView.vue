@@ -1,5 +1,5 @@
 <template>
-  <div id="tags-view-container" class="tags-view-container">
+  <div id="tags-view-container" class="tags-view-container" :class="tagViewType">
     <div class="tags-view-wrapper">
       <router-link
         v-for="tag in visitedViews"
@@ -41,7 +41,7 @@ const state = reactive({
   selectedTag: {},
   affixTags: [],
 })
-
+const tagViewType = computed(() => store.state.layout.tagViewType)
 const visitedViews = computed(() => {
   return store.state.tagsView.visitedViews
 })
@@ -220,8 +220,9 @@ let { visible, top, left, selectedTag } = toRefs(state)
       font-size: 12px;
       margin-left: 5px;
       margin-top: 3px;
+      margin-bottom: 3px;
       text-decoration: none;
-      margin-bottom: -1px;
+      border-radius: var(--el-border-radius-base);
       &:first-of-type {
         margin-left: 10px;
       }
@@ -229,10 +230,9 @@ let { visible, top, left, selectedTag } = toRefs(state)
         margin-right: 15px;
       }
       &.active {
-        // background-color: #42b983;
+        border-color: var(--el-color-primary);
         color: $color-primary;
-        // border-color: #444;
-        border-bottom-color: #fff;
+
         &::before {
           content: "";
           background: var(--el-color-primary);
@@ -243,6 +243,36 @@ let { visible, top, left, selectedTag } = toRefs(state)
           position: relative;
           margin-right: 4px;
           vertical-align: middle;
+        }
+        .el-icon-close {
+          display: inline-block;
+        }
+      }
+      .el-icon-close {
+        display: none;
+      }
+      &:hover {
+        .el-icon-close {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &.tab {
+    .tags-view-wrapper {
+      .tags-view-item {
+        margin-top: 6px;
+        margin-bottom: 0;
+        background: #fff;
+        border-radius: var(--el-border-radius-base) var(--el-border-radius-base) 0 0;
+        border-color: transparent;
+        &.active {
+          border-color: var(--el-border-color-light);
+          border-bottom-color: #fff;
+          top: 1px;
+        }
+        &:hover {
+          background: #fafafa;
         }
       }
     }
@@ -275,7 +305,6 @@ let { visible, top, left, selectedTag } = toRefs(state)
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
-    border-radius: 3px 3px 0 0;
     .el-icon-close {
       border-radius: 6px;
       width: 12px;

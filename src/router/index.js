@@ -47,6 +47,7 @@ const routes = [
         name: "table",
         meta: { title: "表格", icon: "Grid" },
         component: () => import("@/components/Layout/EmptyLayout"),
+        redirect: "/table/customTable",
         children: [
           {
             path: "customTable",
@@ -85,6 +86,7 @@ const routes = [
         name: "form",
         meta: { title: "表单", icon: "Document" },
         component: () => import("@/components/Layout/EmptyLayout"),
+        redirect: "/form/customForm",
         children: [
           {
             path: "customForm",
@@ -111,6 +113,7 @@ const routes = [
         name: "detail",
         meta: { title: "详情", icon: "Tickets" },
         component: () => import("@/components/Layout/EmptyLayout"),
+        redirect: "/detail/customDetail",
         children: [
           {
             path: "customDetail",
@@ -131,6 +134,7 @@ const routes = [
         name: "setting",
         meta: { title: "设置", icon: "Setting" },
         component: () => import("@/components/Layout/EmptyLayout"),
+        redirect: "/setting/theme",
         children: [
           {
             path: "theme",
